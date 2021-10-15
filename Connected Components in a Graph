@@ -1,0 +1,43 @@
+//Connected Components in a Graph
+// Write your code here
+#include <iostream>
+#include<vector>  
+using namespace std;
+void dfs(int node ,vector<int> &vis,vector<int> adj[])
+    {
+        vis[node] = 1;
+	    for(int child : adj[node])
+	    {
+	        if(vis[child]==0)
+	        {
+                
+	            dfs(child,vis,adj);
+	        }
+	    }
+        
+	}
+
+    int main()
+    {
+        int n,m,a,b;
+        cin>>n>>m;
+        vector<int> arr[n+1];
+        while(m--)
+        {
+            cin>>a>>b;
+            arr[a].push_back(b);
+            arr[b].push_back(a);
+        }
+        vector<int> vis(n+1,0);
+        int cc=0;
+        for(int i=1;i<=n;i++)
+        {
+            if(!vis[i])
+            {
+                dfs(i,vis,arr);
+                cc++;
+            }
+        }
+        cout<<cc<<endl;
+        return 0;
+    }
